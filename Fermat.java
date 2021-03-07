@@ -38,7 +38,7 @@ public class Fermat {
     static boolean IsValid(int val, int min, int max) {
         if(val < min || val > max) {
             //tell the user their input was not valid
-            System.out.println("Value must be greater than " + min + "and less than " + max +"\n");
+            System.out.println("Value must be greater than " + (min-1) + " and less than " + (max+1) +"\n");
             return false;
         }
         return true;
