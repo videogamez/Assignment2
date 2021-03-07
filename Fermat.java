@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Fermat {
 
     static int upperLimitK = 30;
+    static int k, n; //equation variables
 
     public static void main(String[] args) {
         PrintDescription();
@@ -17,7 +18,6 @@ public class Fermat {
 
     static void GetInput() {
         Scanner sc = new Scanner(System.in);
-        int k, n;
 
         do {
             System.out.println("Enter the value of k for the equation");  //tell the user to input a value for k
