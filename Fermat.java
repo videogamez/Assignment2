@@ -61,10 +61,12 @@ public class Fermat {
             }
         }
     }
-    public boolean NearMiss(int x, int y, int z, int n) {
+
+    public static boolean NearMiss(int x, int y, int z, int n) {
         float zVal = z^n;
         float xyVal = x^n + y^n;
-        if (xyVal/zVal > 0.9) { return true; } else { return false; }
+        return xyVal/zVal;
+        //if (xyVal/zVal > 0.9) { return true; } else { return false; }
     }
 
 }
