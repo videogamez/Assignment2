@@ -48,7 +48,6 @@ public class Fermat {
     static void TestValues() {
         for(int x = 10; x <= k; x++) {
             for(int y = x; y <= k; y++) { 
-
                 float closeness = 0;  //relative "closeness" of x^n + y^n and z^n
                 int z = x+y/2;
 
@@ -68,6 +67,7 @@ public class Fermat {
                         break;
                     }
                     closeness = near; //closeness is increasing, continue loop
+                    z++;
                 }
 
                 System.out.println(x + ", " + y + ", " + z);
