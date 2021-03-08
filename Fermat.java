@@ -4,9 +4,9 @@
  on 03/07/2021
  for the COSC 445W-01 class.
  Title: "Fermat's Theorem Near Misses"
- Folder: ""
+ Folder: "Assignment2"
  Dependencies: None
- Emails: doughertyd2@duq.edu shileyl@duq.edu
+ Emails: doughertyd2@duq.edu shileyl@duq.edu diemp@duq.edu
  "This program attempts to locate near misses from Fermat's Theorem utilizing the form x^n + y^n <> z^n"
 */
 
@@ -20,13 +20,13 @@ public class Fermat {
     static float smallestRelativeMiss = Float.MAX_VALUE;  //smallest relative miss
     static long smallestMiss = Long.MAX_VALUE;  //smallest actual miss
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { //main
         PrintDescription();
         GetInput();
         TestValues();
     }
 
-    static void PrintDescription() {
+    static void PrintDescription() {  //Tell the user what the program does
         //Describe the problem and purpose of the program, along with what it does
         String problem = 
         "Fermat’s last theorem states that there are no natural numbers x, y, and z such that x^n + y^n = z^n\n" +
@@ -35,7 +35,7 @@ public class Fermat {
         System.out.println(problem);
     }
 
-    static void GetInput() {
+    static void GetInput() {  //Get input variables from the user
         Scanner sc = new Scanner(System.in);
 
         do {
@@ -56,7 +56,7 @@ public class Fermat {
         sc.close();
     }
 
-    static boolean IsValid(int val, int min, int max) {
+    static boolean IsValid(int val, int min, int max) {  //check to make sure the input is valid (in range)
         if(val < min || val > max) {
             //tell the user their input was not valid
             System.out.println("Value must be greater than " + (min-1) + " and less than " + (max+1) +"\n");
@@ -65,9 +65,10 @@ public class Fermat {
         return true;
     }
 
-    static void TestValues() {
-        for(int x = 10; x <= k; x++) {
-            for(int y = x; y <= k; y++) { 
+    static void TestValues() {   //test the different x y z combinations
+        for(int x = 10; x <= k; x++) { //loop through all x value
+            for(int y = x; y <= k; y++) { //loop through y values greater than x
+
                 float closeness = Float.MAX_VALUE;  //relative "closeness" of x^n + y^n and z^n
                 int z = (x+y)/2;
 
@@ -79,9 +80,8 @@ public class Fermat {
 
 
                 //initiate z at a value near x and y
-                while (z <= k) {
+                while (z <= k) {  //increase z until the closest value is found
                     float near = RelativeMiss(x, y, z);   //get the "closeness" of x y z
-                    //System.out.println("X: " + x + " Y: " + y + " Z: " + z + " N: " + near);
                     if(near > closeness)
                         break;
                     
@@ -91,11 +91,13 @@ public class Fermat {
                 z--;
 
                 PrintResults(x, y, z, closeness);
+                if(x != y)
+                    PrintResults(y, x, z, closeness);
             }
         }
     }
 
-    static void PrintResults(int x, int y, int z, float closeness) {
+    static void PrintResults(int x, int y, int z, float closeness) {  //Print the final results
         float relMiss = closeness; //abs value of distance from 1
 
         if(smallestRelativeMiss > relMiss) {   //relMiss is closer to 1 than smallest relative miss, so new smallest rel miss
@@ -110,10 +112,7 @@ public class Fermat {
     public static float RelativeMiss(int x, int y, int z) { // get the relative miss from x,y,z,n
         double zVal = Math.pow(z, n);
         double xyVal = Math.pow(x, n) + Math.pow(y, n);
-        //System.out.println(xyVal);
-        //System.out.println(zVal);
-        //System.out.println(Math.abs(1f - xyVal/zVal));
-        return (float) Math.abs(1.0 - xyVal/zVal);
+        return (float) Math.abs(1.0 - xyVal/zVal);  //essentially distance from 1
     }
 
     public static long ActualMiss(int x, int y, int z) { // get the actual miss from x,y,z,n
