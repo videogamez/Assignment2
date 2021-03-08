@@ -63,7 +63,7 @@ public class Fermat {
 
                 //initiate z at a value near x and y
                 while (z <= k) {
-                    float near = NearMiss(x, y, z, n);   //get the "closeness" of x y z
+                    float near = RelativeMiss(x, y, z, n);   //get the "closeness" of x y z
 
                     if(near < closeness) { //if closeness is less than last z value, break out of loop
                         closeness = near;
@@ -91,11 +91,16 @@ public class Fermat {
         }
     }
 
-    public static float NearMiss(int x, int y, int z, int n) {
+    public static float RelativeMiss(int x, int y, int z, int n) {
         float zVal = z^n;
         float xyVal = x^n + y^n;
         return xyVal/zVal;
-        //if (xyVal/zVal > 0.9) { return true; } else { return false; }
+    }
+
+    public static int ActualMiss(int x, int y, int z, int n) {
+        float zVal = z^n;
+        float xyVal = x^n + y^n;
+        return xyVal-zVal;
     }
 
 }
