@@ -49,7 +49,7 @@ public class Fermat {
         for(int x = 10; x <= k; x++) {
             for(int y = x; y <= k; y++) { 
 
-                float closeness = 0.0f;  //relative "closeness" of x^n + y^n and z^n
+                float closeness = 0;  //relative "closeness" of x^n + y^n and z^n
                 int z = x+y/2;
 
                 if(z > k) {
@@ -60,7 +60,7 @@ public class Fermat {
 
 
                 //initiate z at a value near x and y
-                while (z < k) {
+                while (z <= k) {
                     float near = NearMiss(x, y, z, n);   //get the "closeness" of x y z
 
                     if(near < closeness) { //if closeness is less than last z value, break out of loop
