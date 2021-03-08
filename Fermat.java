@@ -67,7 +67,6 @@ public class Fermat {
                         z--;
                         break;
                     }
-                    z++;
                     closeness = near; //closeness is increasing, continue loop
                 }
 
