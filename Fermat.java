@@ -14,11 +14,11 @@ import java.util.Scanner;
 
 public class Fermat {
 
-    static int upperLimitK = 30;
+    static int upperLimitK = 50;
     static int k, n; //equation variables
 
     static float smallestRelativeMiss = Float.MAX_VALUE;  //smallest relative miss
-    static int smallestMiss = Integer.MAX_VALUE;  //smallest actual miss
+    static long smallestMiss = Long.MAX_VALUE;  //smallest actual miss
 
     public static void main(String[] args) {
         PrintDescription();
@@ -28,7 +28,10 @@ public class Fermat {
 
     static void PrintDescription() {
         //Describe the problem and purpose of the program, along with what it does
-        String problem = "Describe the problem";
+        String problem = 
+        "Fermat’s last theorem states that there are no natural numbers x, y, and z such that x^n + y^n = z^n\n" +
+        "This program will ask for an integer n to plug into the formula, and an integer k as the upper limit of x, y, and z.\n" +
+        "It will then find x, y, and z values greater than 10 and less than k that nearly satisfy the equation.";
         System.out.println(problem);
     }
 
@@ -36,14 +39,16 @@ public class Fermat {
         Scanner sc = new Scanner(System.in);
 
         do {
-            System.out.println("Enter the value of k for the equation");  //tell the user to input a value for k
+            System.out.println("\nThe value k must be greater than 10 and less than " + upperLimitK + ".");
+            System.out.println("Enter the value of k for the equation:");  //tell the user to input a value for k
             k = sc.nextInt();  //set k to the value the user chooses
         } 
         while(!IsValid(k, 10, upperLimitK));  //if the value is not in a valid range, reprompt the user for another value
 
         //same thing for value of n
         do {
-            System.out.println("Enter the value of n for the equation");
+            System.out.println("\nThe value n must be greater than 2 and less than 12.");
+            System.out.println("Enter the value of n for the equation:");
             n = sc.nextInt();
         } 
         while(!IsValid(n, 3, 11));
@@ -111,10 +116,10 @@ public class Fermat {
         return (float) Math.abs(1.0 - xyVal/zVal);
     }
 
-    public static int ActualMiss(int x, int y, int z) { // get the actual miss from x,y,z,n
+    public static long ActualMiss(int x, int y, int z) { // get the actual miss from x,y,z,n
         double zVal = Math.pow(z, n);
         double xyVal = Math.pow(x, n) + Math.pow(y, n);
-        return (int) (xyVal-zVal);
+        return (long) (xyVal-zVal);
     }
 
 }
