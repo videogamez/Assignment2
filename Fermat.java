@@ -8,6 +8,7 @@ public class Fermat {
     public static void main(String[] args) {
         PrintDescription();
         GetInput();
+        TestValues();
     }
 
     static void PrintDescription() {
@@ -42,5 +43,22 @@ public class Fermat {
             return false;
         }
         return true;
+    }
+
+    static void TestValues() {
+        for(int x = 10; x <= k; x++) {
+            for(int y = x; y <= k; y++) { 
+
+                double closeness = 0.0;  //relative "closeness" of x^n + y^n and z^n
+                int z;
+
+                //initiate z at a value near x and y
+                for(z= x+y/2; z < k; z++) {
+
+                }
+
+                System.out.println(x + ", " + y);
+            }
+        }
     }
 }
