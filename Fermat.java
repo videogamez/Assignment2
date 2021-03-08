@@ -50,24 +50,16 @@ public class Fermat {
             for(int y = x; y <= k; y++) { 
 
                 float closeness = 0.0f;  //relative "closeness" of x^n + y^n and z^n
-                int z = x+y/2;
-
-                if(z > k) {
-                    z = k;
-                    System.out.println(x + ", " + y + ", " + z);
-                    continue;
-                }
-
+                int z;
 
                 //initiate z at a value near x and y
-                while (z < k) {
+                for(z= x+y/2; z < k; z++) {
                     float near = NearMiss(x, y, z, n);   //get the "closeness" of x y z
 
                     if(near < closeness) { //if closeness is less than last z value, break out of loop
                         z--;
                         break;
                     }
-                    z++;
                     closeness = near; //closeness is increasing, continue loop
                 }
 
