@@ -54,7 +54,7 @@ public class Fermat {
                 if(z > k) {
                     z = k;
                     System.out.println(x + ", " + y + ", " + z);
-                    continue;
+                    continue;   //continue to next y value
                 }
 
 
@@ -63,14 +63,15 @@ public class Fermat {
                     float near = NearMiss(x, y, z, n);   //get the "closeness" of x y z
 
                     if(near < closeness) { //if closeness is less than last z value, break out of loop
-                        z--;
+                        closeness = near;
                         break;
                     }
                     closeness = near; //closeness is increasing, continue loop
                     z++;
                 }
+                z--;
 
-                System.out.println(x + ", " + y + ", " + z);
+                System.out.println(x + ", " + y + ", " + z + ", " + closeness);
             }
         }
     }
