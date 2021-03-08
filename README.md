@@ -4,3 +4,6 @@
  Dependencies: None
  Emails: doughertyd2@duq.edu shileyl@duq.edu
  "This program attempts to locate near misses from Fermat's Theorem utilizing the form x^n + y^n <> z^n"
+
+Jar can be run in the command line using the following command:
+java -cp Fermat.jar Fermat
