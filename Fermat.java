@@ -5,6 +5,9 @@ public class Fermat {
     static int upperLimitK = 30;
     static int k, n; //equation variables
 
+    static float smallestRelativeMiss = 0f;
+    static int smallestMiss = 0;
+
     public static void main(String[] args) {
         PrintDescription();
         GetInput();
@@ -53,7 +56,7 @@ public class Fermat {
 
                 if(z > k) {
                     z = k;
-                    System.out.println(x + ", " + y + ", " + z);
+                    System.out.println(x + ", " + y + ", " + z + ", " + NearMiss(x, y, z, n));
                     continue;   //continue to next y value
                 }
 
@@ -71,8 +74,20 @@ public class Fermat {
                 }
                 z--;
 
-                System.out.println(x + ", " + y + ", " + z + ", " + closeness);
+                fName(x, y, z, n, closeness);
             }
+        }
+    }
+
+    static void fName(int x, int y, int z, int n, float closeness) {
+        float relMiss = Math.abs(1f - closeness); //abs value of distance from 1
+
+        if(smallestRelativeMiss > relMiss) {   //relMiss is closer to 1 than smallest relative miss, so new smallest rel miss
+            smallestRelativeMiss = relMiss;
+            System.out.println("New closest miss.");
+            System.out.println("x: " + x + " y: " + y + " z: " + z);
+            System.out.println("Relative Miss (ratio): " + closeness);
+            System.out.println("Actual Miss: " + ActualMiss(x, y, z, n));
         }
     }
 
