@@ -24,7 +24,6 @@ public class Fermat {
         PrintDescription();
         GetInput();
         TestValues();
-        System.out.println(RelativeMiss(13, 18, 23, 3));
     }
 
     static void PrintDescription() {
@@ -64,60 +63,58 @@ public class Fermat {
     static void TestValues() {
         for(int x = 10; x <= k; x++) {
             for(int y = x; y <= k; y++) { 
-                float closeness = 0;  //relative "closeness" of x^n + y^n and z^n
-                int z = x+y/2;
+                float closeness = Float.MAX_VALUE;  //relative "closeness" of x^n + y^n and z^n
+                int z = (x+y)/2;
 
                 if(z > k) {
                     z = k;
-                    PrintResults(x, y, z, n, RelativeMiss(x, y, z, n));
+                    PrintResults(x, y, z, RelativeMiss(x, y, z));
                     continue;   //continue to next y value
                 }
 
 
                 //initiate z at a value near x and y
                 while (z <= k) {
-                    float near = RelativeMiss(x, y, z, n);   //get the "closeness" of x y z
-                    System.out.println(near);
-
-                    if(near < closeness) { //if closeness is less than last z value, break out of loop
-                        closeness = near;
+                    float near = RelativeMiss(x, y, z);   //get the "closeness" of x y z
+                    //System.out.println("X: " + x + " Y: " + y + " Z: " + z + " N: " + near);
+                    if(near > closeness)
                         break;
-                    }
+                    
                     closeness = near; //closeness is increasing, continue loop
-                    System.out.println(closeness);
                     z++;
                 }
                 z--;
-                System.out.println(closeness);
 
-                PrintResults(x, y, z, n, closeness);
+                PrintResults(x, y, z, closeness);
             }
         }
     }
 
-    static void PrintResults(int x, int y, int z, int n, float closeness) {
-        float relMiss = Math.abs(1f - closeness); //abs value of distance from 1
-        System.out.println(x + " " + y + " " + z + " " + relMiss);
+    static void PrintResults(int x, int y, int z, float closeness) {
+        float relMiss = closeness; //abs value of distance from 1
 
         if(smallestRelativeMiss > relMiss) {   //relMiss is closer to 1 than smallest relative miss, so new smallest rel miss
             smallestRelativeMiss = relMiss;
             System.out.println("\nNew closest miss.");
             System.out.println("x: " + x + " y: " + y + " z: " + z);
-            System.out.println("Relative Miss (ratio): " + closeness);
-            System.out.println("Actual Miss: " + ActualMiss(x, y, z, n));
+            System.out.println("Relative Miss (ratio): " + (1+closeness));
+            System.out.println("Actual Miss: " + ActualMiss(x, y, z));
         }
     }
 
-    public static float RelativeMiss(int x, int y, int z, int n) { // get the relative miss from x,y,z,n
-        float zVal = z^n;
-        float xyVal = x^n + y^n;
-        return xyVal/zVal;
+    public static float RelativeMiss(int x, int y, int z) { // get the relative miss from x,y,z,n
+        double zVal = Math.pow(z, n);
+        double xyVal = Math.pow(x, n) + Math.pow(y, n);
+        //System.out.println(xyVal);
+        //System.out.println(zVal);
+        //System.out.println(Math.abs(1f - xyVal/zVal));
+        return (float) Math.abs(1.0 - xyVal/zVal);
     }
 
-    public static int ActualMiss(int x, int y, int z, int n) { // get the actual miss from x,y,z,n
-        int zVal = z^n;
-        int xyVal = x^n + y^n;
-        return xyVal-zVal;
+    public static int ActualMiss(int x, int y, int z) { // get the actual miss from x,y,z,n
+        double zVal = Math.pow(z, n);
+        double xyVal = Math.pow(x, n) + Math.pow(y, n);
+        return (int) (xyVal-zVal);
     }
 
 }
