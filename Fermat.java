@@ -12,7 +12,7 @@ public class Fermat {
 
     static void PrintDescription() {
         //Describe the problem and purpose of the program, along with what it does
-        String problem = "Describle the problem";
+        String problem = "Describe the problem";
         System.out.println(problem);
     }
 
@@ -43,4 +43,11 @@ public class Fermat {
         }
         return true;
     }
+
+    public boolean NearMiss(int x, int y, int z, int n) {
+        float zVal = z^n;
+        float xyVal = x^n + y^n;
+        if (xyVal/zVal > 0.9) { return true; } else { return false; }
+    }
+
 }
